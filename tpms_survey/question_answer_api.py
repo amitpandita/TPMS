@@ -120,7 +120,7 @@ def update_question(get_data):
 	status_cd = get_data.get('status_cd')
 	updated_by = get_data.get('updated_by')
 	now_date = datetime.now()
-	if question_id and template_id and question_type and question_desc and presentation_order.isdigit() and is_question_rated and status_cd and created_by:
+	if question_id and template_id and question_type and question_desc and presentation_order.isdigit() and is_question_rated and status_cd and updated_by:
 		template_data = get_template_object(template_id)
 		if template_data:
 			question_data  = get_question_object(question_id)
