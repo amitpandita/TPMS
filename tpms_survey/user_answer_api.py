@@ -61,5 +61,5 @@ def get_user_answer_by_user_id (get_data):
 			data["data"].append(user_answer_dict(ua))
 	else:
 		data["status"] = 0
-		data["msg"] = "Question does not exist."
+		data["msg"] = "User Question Answer does not exist."
 	return data
