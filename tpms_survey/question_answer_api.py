@@ -72,7 +72,6 @@ def add_question(get_data):
 	@param: <data> question data dictionary
 	'''
 	data = {}
-	import pdb;pdb.set_trace()
 	template_id = get_data.get('template_id')
 	presentation_order = get_data.get('presentation_order','')
 	question_type = get_data.get('question_type')
@@ -133,7 +132,7 @@ def update_question(get_data):
 				question_data.question_desc = question_desc
 				question_data.is_question_rated = is_question_rated
 				question_data.weight = weight
-				question_data.status = status
+				question_data.status_cd = status_cd
 				question_data.updated_by = updated_by
 				question_data.updated_date = now_date
 				question_data.save()
@@ -159,7 +158,6 @@ def delete_question (get_data):
 	@summary to delete question
 	@param <data> question data dictionary
 	'''
-	status = False
 	data = {}
 	question_id = get_data.get('question_id')
 	if question_id:
@@ -169,8 +167,22 @@ def delete_question (get_data):
 			if 'multi-choice' == last_question_type:
 				delete_answer_by_question_id(question_id)
 			question_data.delete()
-			status = True
-	return status
+			data['status'] = 1
+			data['msg'] = 'Question deleted succssfully'
+		else:
+			data['status'] = 0
+			data['msg'] = 'Question does not exist'
+	else:
+		data['status'] = 0
+		data['msg'] = 'question_id is missing'
+	return data
+
+def get_answers_by_question_id (question_id):
+	data = []
+	answer_data = Answer.objects.filter(question_id = question_id)
+	for ad in answer_data:
+		data.append(answer_dict[ad])
+	return data
 
 def get_answer_by_id (get_data):
 	data = {}
@@ -179,13 +191,6 @@ def get_answer_by_id (get_data):
 	if answer:
 		answer = answer[0]
 		data = answer_dict(answer)
-	return data
-
-def get_answers_by_question_id (question_id):
-	data = []
-	answer_data = Answer.objects.filter(question_id = question_id)
-	for ad in answer_data:
-		data.append(answer_dict[ad])
 	return data
 
 def add_answer(get_data):

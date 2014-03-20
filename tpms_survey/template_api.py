@@ -88,7 +88,7 @@ def update_template(get_data):
 	presentation_order = get_data.get('presentation_order','')
 	status_cd = get_data.get('status_cd')
 	updated_by = get_data.get('updated_by')
-	if template_id and template_name and template_desc and project_team_id.isdigit() and presentation_order.isdigit() and status_cd and created_by:
+	if template_id and template_name and template_desc and project_team_id.isdigit() and presentation_order.isdigit() and status_cd and updated_by:
 		template_data = get_template_object(template_id)
 		if template_data:
 			template_data = template_data[0]

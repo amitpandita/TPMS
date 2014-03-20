@@ -45,7 +45,7 @@ class Answer(models.Model):
 class UserAnswer(models.Model):
 	user_answer_id = models.AutoField(primary_key=True)
 	question = models.ForeignKey(Question)
-	answer = models.ForeignKey(Answer)
+	answer = models.ForeignKey(Answer, default=None, null=True, blank=True)
 	user_id = models.CharField(max_length=64)
 	answer_text = models.CharField(max_length=500, null=True, blank=True)
 	answer_score = models.IntegerField()

@@ -22,18 +22,20 @@ def add_user_answer(get_data):
 	data = {}
 	user_id = get_data.get('user_id')
 	question_id = get_data.get('question_id')
-	answer_id = get_data.get('answer_id')
+	answer_id = get_data.get('answer_id', None)
 	answer_text = get_data.get('answer_text')
 	status_cd = get_data.get('status_cd')
+	answer_score = get_data.get('answer_score')
 	created_by = get_data.get('created_by')
 	now_date = datetime.now()
-	if user_id and question_id and answer_id and answer_text and status_cd and created_by:
+	if user_id and question_id and answer_text and status_cd and created_by:
 		user_answer_data = UserAnswer(
 				user_id = user_id,
 				question_id = question_id,
 				answer_id = answer_id,
 				answer_text = answer_text,
 				status_cd = status_cd,
+				answer_score = answer_score,
 				created_by = created_by,
 				updated_by = created_by,
 				created_date = now_date,
@@ -42,7 +44,7 @@ def add_user_answer(get_data):
 		user_answer_data.save()
 		data['status'] = 1
 		data['msg'] = 'User Answer Added succssfully'
-		data['data'] = {'question_id': user_answer_data.user_answer_id}
+		data['data'] = {'user_answer_id': user_answer_data.user_answer_id}
 	else:
 		data['status'] = 0
 		data['msg'] = 'Some fields are missing'

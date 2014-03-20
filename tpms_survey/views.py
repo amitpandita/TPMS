@@ -44,8 +44,6 @@ def delete_question(request):
 
 def get_answer_by_id(request):
 	return HttpResponse(json.dumps(question_answer_api.get_answer_by_id(request.GET)), content_type="application/json")
-def get_answers_by_question_id(request):
-	return HttpResponse(json.dumps(question_answer_api.get_answers_by_question_id(request.GET)), content_type="application/json")
 @csrf_exempt
 def add_answer(request):
 	return HttpResponse(json.dumps(question_answer_api.add_answer(request.POST)), content_type="application/json")
